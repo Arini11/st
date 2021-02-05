@@ -1,3 +1,7 @@
+# BUILD PERSONALITZADA ST
+
+https://st.suckless.org/
+
 st - simple terminal
 --------------------
 st is a simple terminal emulator for X which sucks less.
