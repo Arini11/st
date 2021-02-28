@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=25:antialias=true:autohint=true";
+static char *font = "Hack:style=Bold:pixelsize=20:antialias=true:autohint=true";
 static int borderpx = 5;
 
 /*
@@ -94,7 +94,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.8;
+float alpha = 0.7;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -211,15 +211,13 @@ ResourcePref resources[] = {
 };
 
 /*
- * Internal mouse shortcuts.
- * Beware that overloading Button1 will disable the selection.
- */
+ * Internal mouse shortcuts.  Beware that overloading Button1 will disable the selection.  */ 
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+ 	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
+  { ShiftMask,            Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
@@ -231,18 +229,18 @@ static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} }, { XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
+	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
+	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	/* El zoom es fa amb ctl + shift + j/k */
 	{ TERMMOD,              XK_J,           zoom,           {.f = +1} },
 	{ TERMMOD,              XK_K,           zoom,           {.f = -1} },
-	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ShiftMask,            XK_K,    	kscrollup,      {.i = -1} },
-	{ ShiftMask,            XK_J,		kscrolldown,    {.i = -1} },
+	{ MODKEY,               XK_K,           kscrollup,      {.i = -1} },
+	{ MODKEY,               XK_J,           kscrolldown,    {.i = -1} },
 };
 
 /*
